@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  consul_1:
+    container_name: consul_1
+    image: consul:latest
+    command: agent -dev -client=0.0.0.0 -bind=0.0.0.0
+    ports:
+    - '8500:8500'
+
+  consul_2:
+    container_name: consul_2
+    image: consul:latest
+    command: agent -dev -bind=0.0.0.0 -join=consul_1
+    depends_on:
+    - consul_1
+
+  consul_3:
+    container_name: consul_3
+    image: consul:latest
+    command: agent -dev -bind=0.0.0.0 -join=consul_1
+    depends_on:
+    - consul_1
