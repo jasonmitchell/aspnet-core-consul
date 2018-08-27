@@ -43,9 +43,9 @@ namespace Web.Api
             {
                 ID = _registrationId,
                 Name = _consulConfig.Value.ServiceName,
-                Address = $"{uri.Scheme}://{uri.Host}",
+                Address = _consulConfig.Value.ServiceAddress, // TODO: Maybe this shouldn't be config?
                 Port = uri.Port,
-                Tags = new[] { "Testing", "Self-Registration" }
+                Tags = _consulConfig.Value.ServiceTags
             };
 
             _logger.LogInformation("Registering in Consul");
